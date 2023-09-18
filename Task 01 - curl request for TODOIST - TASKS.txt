@@ -1,0 +1,674 @@
+CREATE NEW TASK (priority 1, no project_id)
+marcelo@marcelo-VirtualBox:~$ curl "https://api.todoist.com/rest/v2/tasks" -X POST --data '{"content": "Buy Juice", "due_string": "tomorrow at 12:00", "due_lang": "en", "priority": 1}' -H "Content-Type: application/json" -H "Authorization: Bearer $token" -v
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 18.164.32.31:443...
+* TCP_NODELAY set
+* Connected to api.todoist.com (18.164.32.31) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x55a1e2bed060)
+> POST /rest/v2/tasks HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.68.0
+> accept: */*
+> content-type: application/json
+> authorization: Bearer 3a8acb84a8c9516368642906a284b7fdafa69549
+> content-length: 92
+> 
+* We are completely uploaded and fine
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+< HTTP/2 200 
+< content-type: application/json
+< content-length: 566
+< date: Mon, 18 Sep 2023 21:03:50 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=02a233f9c2b44ad287a9cbf2467eeba4; Expires=Thu, 15-Sep-2033 21:03:50 GMT; Secure; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 d08c79ec8e7bc3775ebc9fa1a2db54de.cloudfront.net (CloudFront)
+< x-amz-cf-pop: SCL51-P2
+< x-amz-cf-id: z5qkEoncHX7JRBqYCLljitVurft1OwOXlYMivSpYkF_SgaRH4rpwlQ==
+< 
+{
+	"id": "7240413680",
+	"assigner_id": null,
+	"assignee_id": null,
+	"project_id": "2302150064",
+	"section_id": null,
+	"parent_id": null,
+	"order": 9,
+	"content": "Buy Juice",
+	"description": "",
+	"is_completed": false,
+	"labels": [],
+	"priority": 1,
+	"comment_count": 0,
+	"creator_id": "41835012",
+	"created_at": "2023-09-18T21:03:50.418977Z",
+	"due": {
+		"date": "2023-09-19",
+		"string": "tomorrow at 12:00",
+		"lang": "en",
+		"is_recurring": false,
+		"datetime": "2023-09-19T12:00:00"
+	},
+	"url": "https://todoist.com/showTask?id=7240413680",
+	"duration": null
+}
+* Connection #0 to host api.todoist.com left intact
+
+GET ACTIVE TASKS
+marcelo@marcelo-VirtualBox:~$ curl -X GET https://api.todoist.com/rest/v2/tasks -H "Authorization: Bearer $token" -v
+Note: Unnecessary use of -X or --request, GET is already inferred.
+*   Trying 18.164.32.86:443...
+* TCP_NODELAY set
+* Connected to api.todoist.com (18.164.32.86) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x559fa5ff1060)
+> GET /rest/v2/tasks HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.68.0
+> accept: */*
+> authorization: Bearer 3a8acb84a8c9516368642906a284b7fdafa69549
+> 
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+< HTTP/2 200 
+< content-type: application/json
+< date: Mon, 18 Sep 2023 21:04:40 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=e5fe23e8107d4737a52aaf3e42a23be7; Expires=Thu, 15-Sep-2033 21:04:40 GMT; Secure; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 b69ab3c1a510b8b902071c2300c86074.cloudfront.net (CloudFront)
+< x-amz-cf-pop: SCL51-P2
+< x-amz-cf-id: 1UJv86i9s2UgisGJWYDBY6orACpVAtnl3Gma6b20nOy69s00HzRx_w==
+< 
+[
+	{
+		"id": "6338422908",
+		"assigner_id": null,
+		"assignee_id": null,
+		"project_id": "2302150064",
+		"section_id": null,
+		"parent_id": null,
+		"order": 1,
+		"content": "Learn the basics with the easy-to-follow [Getting Started Guide](https://todoist.com/getting-started?utm_source=todoist&utm_medium=in_app&utm_campaign=onboarding_project&utm_content=inbox) 🔗",
+		"description": "",
+		"is_completed": false,
+		"labels": [],
+		"priority": 4,
+		"comment_count": 0,
+		"creator_id": "41835012",
+		"created_at": "2022-11-10T02:19:59.262351Z",
+		"due": {
+			"date": "2022-11-09",
+			"string": "Nov 9",
+			"lang": "en",
+			"is_recurring": false
+		},
+		"url": "https://todoist.com/showTask?id=6338422908",
+		"duration": null
+	},
+	{
+		"id": "6338422927",
+		"assigner_id": null,
+		"assignee_id": null,
+		"project_id": "2302150064",
+		"section_id": null,
+		"parent_id": null,
+		"order": 2,
+		"content": "Take the [productivity method quiz](https://todoist.com/productivity-methods?utm_source=todoist&utm_medium=in_app&utm_campaign=onboarding_project&utm_content=inbox)",
+		"description": "Get a personalized recommendation from Todoist",
+		"is_completed": false,
+		"labels": [],
+		"priority": 3,
+		"comment_count": 0,
+		"creator_id": "41835012",
+		"created_at": "2022-11-10T02:20:00.115725Z",
+		"due": {
+			"date": "2022-11-10",
+			"string": "Nov 10",
+			"lang": "en",
+			"is_recurring": false
+		},
+		"url": "https://todoist.com/showTask?id=6338422927",
+		"duration": null
+	},
+	{
+		"id": "6338422974",
+		"assigner_id": null,
+		"assignee_id": null,
+		"project_id": "2302150064",
+		"section_id": null,
+		"parent_id": null,
+		"order": 3,
+		"content": "Download additional [free apps and plugins](https://todoist.com/help/articles/205383721?utm_source=todoist&utm_medium=in_app&utm_campaign=onboarding_project&utm_content=inbox) for 💻,⌚️,🖥,📱 and 📧",
+		"description": "",
+		"is_completed": false,
+		"labels": [],
+		"priority": 1,
+		"comment_count": 0,
+		"creator_id": "41835012",
+		"created_at": "2022-11-10T02:20:00.811681Z",
+		"due": {
+			"date": "2022-11-12",
+			"string": "Nov 12",
+			"lang": "en",
+			"is_recurring": false
+		},
+		"url": "https://todoist.com/showTask?id=6338422974",
+		"duration": null
+	},
+	{
+		"id": "6338422985",
+		"assigner_id": null,
+		"assignee_id": null,
+		"project_id": "2302150064",
+		"section_id": null,
+		"parent_id": null,
+		"order": 4,
+		"content": "[Connect Todoist](https://todoist.com/integrations?utm_source=todoist&utm_medium=in_app&utm_campaign=onboarding_project&utm_content=inbox) with all the tools I already use",
+		"description": "",
+		"is_completed": false,
+		"labels": [],
+		"priority": 1,
+		"comment_count": 1,
+		"creator_id": "41835012",
+		"created_at": "2022-11-10T02:20:01.384192Z",
+		"due": null,
+		"url": "https://todoist.com/showTask?id=6338422985",
+		"duration": null
+	},
+	{
+		"id": "6338423002",
+		"assigner_id": null,
+		"assignee_id": null,
+		"project_id": "2302150064",
+		"section_id": null,
+		"parent_id": null,
+		"order": 5,
+		"content": "How Todoist's founder achieves his goals while reducing his stress 😌",
+		"description": "[Systemist: Todoist's Founder's Personal Productivity Workflow](https://todoist.com/productivity-methods/systemist?utm_source=todoist&utm_medium=in_app&utm_campaign=onboarding_project&utm_content=inbox)",
+		"is_completed": false,
+		"labels": [
+			"read"
+		],
+		"priority": 1,
+		"comment_count": 0,
+		"creator_id": "41835012",
+		"created_at": "2022-11-10T02:20:02.339252Z",
+		"due": null,
+		"url": "https://todoist.com/showTask?id=6338423002",
+		"duration": null
+	},
+	{
+		"id": "6437602145",
+		"assigner_id": null,
+		"assignee_id": null,
+		"project_id": "2304091073",
+		"section_id": null,
+		"parent_id": null,
+		"order": 1,
+		"content": "NewTask1671037059385",
+		"description": "",
+		"is_completed": false,
+		"labels": [],
+		"priority": 1,
+		"comment_count": 0,
+		"creator_id": "41835012",
+		"created_at": "2022-12-14T16:57:47.118137Z",
+		"due": null,
+		"url": "https://todoist.com/showTask?id=6437602145",
+		"duration": null
+	},
+	{
+		"id": "7240361261",
+		"assigner_id": null,
+		"assignee_id": null,
+		"project_id": "2302150064",
+		"section_id": null,
+		"parent_id": null,
+		"order": 8,
+		"content": "Buy Coffee",
+		"description": "",
+		"is_completed": false,
+		"labels": [],
+		"priority": 1,
+		"comment_count": 0,
+		"creator_id": "41835012",
+		"created_at": "2023-09-18T20:42:33.814297Z",
+		"due": {
+			"date": "2023-09-19",
+			"string": "tomorrow at 12:00",
+			"lang": "en",
+			"is_recurring": false,
+			"datetime": "2023-09-19T12:00:00"
+		},
+		"url": "https://todoist.com/showTask?id=7240361261",
+		"duration": null
+	},
+	{
+		"id": "7240413680",
+		"assigner_id": null,
+		"assignee_id": null,
+		"project_id": "2302150064",
+		"section_id": null,
+		"parent_id": null,
+		"order": 9,
+		"content": "Buy Juice",
+		"description": "",
+		"is_completed": false,
+		"labels": [],
+		"priority": 1,
+		"comment_count": 0,
+		"creator_id": "41835012",
+		"created_at": "2023-09-18T21:03:50.418977Z",
+		"due": {
+			"date": "2023-09-19",
+			"string": "tomorrow at 12:00",
+			"lang": "en",
+			"is_recurring": false,
+			"datetime": "2023-09-19T12:00:00"
+		},
+		"url": "https://todoist.com/showTask?id=7240413680",
+		"duration": null
+	}
+]
+* Connection #0 to host api.todoist.com left intact
+
+GET AN ACTIVE TASK
+marcelo@marcelo-VirtualBox:~$ curl "https://api.todoist.com/rest/v2/tasks/7240361261" -H "Authorization: Bearer $token" -v
+*   Trying 18.164.32.86:443...
+* TCP_NODELAY set
+* Connected to api.todoist.com (18.164.32.86) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x561bed347060)
+> GET /rest/v2/tasks/7240361261 HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.68.0
+> accept: */*
+> authorization: Bearer 3a8acb84a8c9516368642906a284b7fdafa69549
+> 
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+< HTTP/2 200 
+< content-type: application/json
+< content-length: 567
+< date: Mon, 18 Sep 2023 21:05:56 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=c719d1c56ee84baf993918e21e84d9c5; Expires=Thu, 15-Sep-2033 21:05:56 GMT; Secure; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 e729b6f49afc6cf244ed2ba04b83a926.cloudfront.net (CloudFront)
+< x-amz-cf-pop: SCL51-P2
+< x-amz-cf-id: f1E_f7hJyzoooE_UX2Ozfe2v_x4pm4_Xc-TJD2t1OkMNWVAJ-J7khw==
+< 
+{
+	"id": "7240361261",
+	"assigner_id": null,
+	"assignee_id": null,
+	"project_id": "2302150064",
+	"section_id": null,
+	"parent_id": null,
+	"order": 8,
+	"content": "Buy Coffee",
+	"description": "",
+	"is_completed": false,
+	"labels": [],
+	"priority": 1,
+	"comment_count": 0,
+	"creator_id": "41835012",
+	"created_at": "2023-09-18T20:42:33.814297Z",
+	"due": {
+		"date": "2023-09-19",
+		"string": "tomorrow at 12:00",
+		"lang": "en",
+		"is_recurring": false,
+		"datetime": "2023-09-19T12:00:00"
+	},
+	"url": "https://todoist.com/showTask?id=7240361261",
+	"duration": null
+}
+* Connection #0 to host api.todoist.com left intact
+
+UPDATE A TASK
+marcelo@marcelo-VirtualBox:~$ curl "https://api.todoist.com/rest/v2/tasks/7240361261" -X POST --data '{"content": "Buy 2 Coffees"}' -H "Content-Type: application/json" -H "Authorization: Bearer $token" -v
+Note: Unnecessary use of -X or --request, POST is already inferred.
+*   Trying 18.164.32.31:443...
+* TCP_NODELAY set
+* Connected to api.todoist.com (18.164.32.31) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x56339aa2d060)
+> POST /rest/v2/tasks/7240361261 HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.68.0
+> accept: */*
+> content-type: application/json
+> authorization: Bearer 3a8acb84a8c9516368642906a284b7fdafa69549
+> content-length: 28
+> 
+* We are completely uploaded and fine
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+< HTTP/2 200 
+< content-type: application/json
+< content-length: 570
+< date: Mon, 18 Sep 2023 21:07:23 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=ab157a829b0941738cbbf173c3fb6d28; Expires=Thu, 15-Sep-2033 21:07:23 GMT; Secure; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 d26452a59af67430d76abeae62c26e32.cloudfront.net (CloudFront)
+< x-amz-cf-pop: SCL51-P2
+< x-amz-cf-id: _wFH9-Dy-glalmDaJ-UHDumK7TTBIFDih39Enc6y3wfEONC0GW04iw==
+< 
+{
+	"id": "7240361261",
+	"assigner_id": null,
+	"assignee_id": null,
+	"project_id": "2302150064",
+	"section_id": null,
+	"parent_id": null,
+	"order": 8,
+	"content": "Buy 2 Coffees",
+	"description": "",
+	"is_completed": false,
+	"labels": [],
+	"priority": 1,
+	"comment_count": 0,
+	"creator_id": "41835012",
+	"created_at": "2023-09-18T20:42:33.814297Z",
+	"due": {
+		"date": "2023-09-19",
+		"string": "tomorrow at 12:00",
+		"lang": "en",
+		"is_recurring": false,
+		"datetime": "2023-09-19T12:00:00"
+	},
+	"url": "https://todoist.com/showTask?id=7240361261",
+	"duration": null
+}
+* Connection #0 to host api.todoist.com left intact
+
+CLOSE A TASK
+marcelo@marcelo-VirtualBox:~$ curl -X POST "https://api.todoist.com/rest/v2/tasks/7240354343/close" -H "Authorization: Bearer $token" -v
+*   Trying 18.164.32.86:443...
+* TCP_NODELAY set
+* Connected to api.todoist.com (18.164.32.86) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x5636f6a5b060)
+> POST /rest/v2/tasks/7240354343/close HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.68.0
+> accept: */*
+> authorization: Bearer 3a8acb84a8c9516368642906a284b7fdafa69549
+> 
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+< HTTP/2 204 
+< date: Mon, 18 Sep 2023 20:59:07 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=67ce2904fbee4496bd6b5a22e2bd816f; Expires=Thu, 15-Sep-2033 20:59:06 GMT; Secure; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 e729b6f49afc6cf244ed2ba04b83a926.cloudfront.net (CloudFront)
+< x-amz-cf-pop: SCL51-P2
+< x-amz-cf-id: EZ7Hc_Tr5FVDLyWuILeRx5UKLv_o0dLalsdC9e8_pL15ngLIW2Joxw==
+< 
+* Connection #0 to host api.todoist.com left intact
+
+REOPEN A TASK
+marcelo@marcelo-VirtualBox:~$ curl -X POST "https://api.todoist.com/rest/v2/tasks/7240354343/reopen" -H "Authorization: Bearer $token" -v
+*   Trying 18.164.32.85:443...
+* TCP_NODELAY set
+* Connected to api.todoist.com (18.164.32.85) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x5584b7930060)
+> POST /rest/v2/tasks/7240354343/reopen HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.68.0
+> accept: */*
+> authorization: Bearer 3a8acb84a8c9516368642906a284b7fdafa69549
+> 
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+< HTTP/2 204 
+< date: Mon, 18 Sep 2023 20:57:24 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=fc3d3b987cc0440292f99d2bbcf6010d; Expires=Thu, 15-Sep-2033 20:57:24 GMT; Secure; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 d83a47d6c7f7885c98fc017290f142d0.cloudfront.net (CloudFront)
+< x-amz-cf-pop: SCL51-P2
+< x-amz-cf-id: oUFjDg5wm3k-VNu2ll4YMZXKXyGaTocdsIJ517BrLDqFpsxNYhtxvg==
+< 
+* Connection #0 to host api.todoist.com left intact
+
+DELETE A TASK
+marcelo@marcelo-VirtualBox:~$ curl -X DELETE "https://api.todoist.com/rest/v2/tasks/7240347241" -H "Authorization: Bearer $token" -v
+*   Trying 18.164.32.86:443...
+* TCP_NODELAY set
+* Connected to api.todoist.com (18.164.32.86) port 443 (#0)
+* ALPN, offering h2
+* ALPN, offering http/1.1
+* successfully set certificate verify locations:
+*   CAfile: /etc/ssl/certs/ca-certificates.crt
+  CApath: /etc/ssl/certs
+* TLSv1.3 (OUT), TLS handshake, Client hello (1):
+* TLSv1.3 (IN), TLS handshake, Server hello (2):
+* TLSv1.3 (IN), TLS handshake, Encrypted Extensions (8):
+* TLSv1.3 (IN), TLS handshake, Certificate (11):
+* TLSv1.3 (IN), TLS handshake, CERT verify (15):
+* TLSv1.3 (IN), TLS handshake, Finished (20):
+* TLSv1.3 (OUT), TLS change cipher, Change cipher spec (1):
+* TLSv1.3 (OUT), TLS handshake, Finished (20):
+* SSL connection using TLSv1.3 / TLS_AES_128_GCM_SHA256
+* ALPN, server accepted to use h2
+* Server certificate:
+*  subject: CN=todoist.com
+*  start date: May 11 00:00:00 2023 GMT
+*  expire date: Jun  8 23:59:59 2024 GMT
+*  subjectAltName: host "api.todoist.com" matched cert's "*.todoist.com"
+*  issuer: C=US; O=Amazon; CN=Amazon RSA 2048 M02
+*  SSL certificate verify ok.
+* Using HTTP2, server supports multi-use
+* Connection state changed (HTTP/2 confirmed)
+* Copying HTTP/2 data in stream buffer to connection buffer after upgrade: len=0
+* Using Stream ID: 1 (easy handle 0x556429e66060)
+> DELETE /rest/v2/tasks/7240347241 HTTP/2
+> Host: api.todoist.com
+> user-agent: curl/7.68.0
+> accept: */*
+> authorization: Bearer 3a8acb84a8c9516368642906a284b7fdafa69549
+> 
+* TLSv1.3 (IN), TLS handshake, Newsession Ticket (4):
+* Connection state changed (MAX_CONCURRENT_STREAMS == 128)!
+< HTTP/2 204 
+< date: Mon, 18 Sep 2023 21:01:29 GMT
+< access-control-allow-credentials: false
+< access-control-allow-origin: *
+< cache-control: no-cache
+< referrer-policy: strict-origin-when-cross-origin
+< server: gunicorn
+< set-cookie: csrf=8e838a5f81f04ddab223e98919886bc0; Expires=Thu, 15-Sep-2033 21:01:29 GMT; Secure; Path=/; SameSite=None
+< strict-transport-security: max-age=31536000; includeSubDomains; preload
+< vary: Accept-Encoding
+< x-cache: Miss from cloudfront
+< via: 1.1 a78b883f23f1e844073a5e759e24430c.cloudfront.net (CloudFront)
+< x-amz-cf-pop: SCL51-P2
+< x-amz-cf-id: 2kHDomxtGtChOZQ2MD3_UOy-mMwXV-GJJOlFYVSBcRvIJCIuszVH3Q==
+< 
+* Connection #0 to host api.todoist.com left intact
