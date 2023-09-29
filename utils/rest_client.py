@@ -76,12 +76,11 @@ class RestClient(metaclass=Singleton):
 
 
 if __name__ == '__main__':
-
     token = TOKEN_TODO
     print(token)
     headers = {
         "Authorization": f"Bearer {token}"
     }
     RestClient().send_request("get", session=requests.Session(),
-                             url="https://api.todoist.com/rest/v2/projects",
-                             headers=headers)
+                              url="https://api.todoist.com/rest/v2/projects",
+                              headers=headers)

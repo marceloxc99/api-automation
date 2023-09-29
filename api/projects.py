@@ -9,7 +9,7 @@ import unittest
 import requests
 from nose2.tools import params
 
-from config.config import TOKEN_TODO, HEADERS
+from config.config import HEADERS
 from utils.logger import get_logger
 from utils.rest_client import RestClient
 
@@ -43,10 +43,10 @@ class Projects(unittest.TestCase):
         Test get all projects
         """
         response = RestClient().send_request("get", session=self.session,
-                                                 url=self.url_base, headers=HEADERS)
+                                             url=self.url_base, headers=HEADERS)
         assert response.status_code == 200
 
-    @params("Project 2", "1111111", "!@$$@$!@$")
+    @params("Project X", "1111111", "!@$$@$!@$")
     def test_create_project(self, name_project):
         """
         Test for create project
@@ -54,9 +54,10 @@ class Projects(unittest.TestCase):
         body_project = {
             "name": name_project
         }
-        response = RestClient.send_request("post", session=self.session, url=self.url_base,
-                                                 headers=HEADERS,
-                                                 data=body_project)
+
+        response = RestClient().send_request("post", session=self.session, url=self.url_base,
+                                             headers=HEADERS,
+                                             data=body_project)
         LOGGER.info("Response for create project: %s", response.json())
         self.project_id_update = response.json()["id"]
         LOGGER.debug("Project id generated: %s", self.project_id_update)
@@ -69,7 +70,7 @@ class Projects(unittest.TestCase):
         """
         url = f"{self.url_base}/{self.project_id}"
         response = RestClient().send_request("get", session=self.session,
-                                                 url=url, headers=HEADERS)
+                                             url=url, headers=HEADERS)
         print(response.json())
         assert response.status_code == 200
 
@@ -95,8 +96,8 @@ class Projects(unittest.TestCase):
             "name": "Project 2",
             "color": "red"
         }
-        response = self.rest_client.send_request("post", session=self.session, url=url,
-                                                 headers=HEADERS, data=data_update)
+        response = RestClient().send_request("post", session=self.session, url=url,
+                                             headers=HEADERS, data=data_update)
         print(response.json())
         assert response.status_code == 200
 
@@ -107,5 +108,5 @@ class Projects(unittest.TestCase):
         for project in cls.projects_list:
             url = f"{cls.url_base}/{project}"
             RestClient().send_request("delete", session=cls.session, url=url,
-                                         headers=cls.headers)
+                                      headers=HEADERS)
             LOGGER.info("Deleting project: %s", {project})
