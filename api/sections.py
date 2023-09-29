@@ -34,7 +34,6 @@ class Sections(unittest.TestCase):
         assert response.status_code == 200
 
     def test_get_all_sections(self):
-
         response = TodoBase().get_all_sections()
         LOGGER.info("Number of sections returned: %s", len(response.json()))
         assert response.status_code == 200
@@ -56,3 +55,26 @@ class Sections(unittest.TestCase):
         response = RestClient().send_request("get", session=self.session, headers=HEADERS,
                                              url=url_section)
         assert response.status_code == 200
+
+    def test_update_section(self):
+        data = {
+            "name": "Section Updated"
+        }
+        response = TodoBase().get_all_sections()
+        section_id = response.json()[0]["id"]
+        LOGGER.info("Section Id : %s", section_id)
+        url_section = f"{self.url_section}/{section_id}"
+        response = RestClient().send_request("post", session=self.session, headers=HEADERS,
+                                             url=url_section, data=data)
+        assert response.status_code == 200
+        assert response.json()["name"] == "Section Name Updated"
+
+    def test_delete_section(self):
+
+        response = TodoBase().get_all_sections()
+        section_id = response.json()[0]["id"]
+        LOGGER.info("Section Id : %s", section_id)
+        url_section = f"{self.url_section}/{section_id}"
+        response = RestClient().send_request("delete", session=self.session, headers=HEADERS,
+                                             url=url_section)
+        assert response.status_code == 204
