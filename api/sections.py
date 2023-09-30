@@ -67,7 +67,7 @@ class Sections(unittest.TestCase):
         response = RestClient().send_request("post", session=self.session, headers=HEADERS,
                                              url=url_section, data=data)
         assert response.status_code == 200
-        assert response.json()["name"] == "Section Name Updated"
+        assert response.json()["name"] == "Section Updated"
 
     def test_delete_section(self):
 
